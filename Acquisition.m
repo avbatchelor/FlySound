@@ -369,7 +369,7 @@ classdef Acquisition < handle
         end
         
         function updateFileNames(obj,metprop,propevnt)
-            obj.D = ['C:\Users\Anthony Azevedo\Acquisition\',datestr(date,'yymmdd'),'\',...
+            obj.D = ['C:\Users\Alex\Acquisition\',datestr(date,'yymmdd'),'\',...
                 datestr(date,'yymmdd'),'_F',obj.flynumber,'_C',obj.cellnumber];
             if ~isempty(obj.rig)
                 obj.saveAcquisition();

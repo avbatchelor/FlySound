@@ -5,7 +5,6 @@
 
 toggleImagingPref('on')
 
-% Start the bitch 
 clear all, close all
 A = Acquisition;
 
@@ -51,7 +50,7 @@ A.protocol.setParams('-q',...
     'postDurInSec',4,...
     'displacements',[3 30] * .1);
 A.tag
-A.run(3)
+A.run(1)
 systemsound('Notify');
 A.clearTags 
 
