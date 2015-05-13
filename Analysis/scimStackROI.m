@@ -1,4 +1,4 @@
-function varargout = scimStackROI(data,params,varargin)
+function Masks = scimStackROI(data,params,varargin)
 % scimStackROIBatch(data,params,montageflag)
 
 p = inputParser;
@@ -16,7 +16,7 @@ parse(p,varargin{:});
 
 varargout = {[]};
 
-imdir = regexprep(data.name,{'Raw','.mat','Acquisition'},{'Images','','Raw_Data'});
+imdir = regexprep(data.name,{'Raw','.mat','Anthony Azevedo\\Acquisition'},{'Images','','Alex\\Documents\\Data\\CalciumImagingData\\B1'});
 if ~isdir(imdir)
     error('No Camera Input: Exiting %s routine',mfilename);
 end
@@ -87,13 +87,15 @@ end
 I_green = squeeze(nanmean(I(:,:,:,2),3));
 I_red = squeeze(nanmean(I(:,:,:,1),3));
 temp.ROI = getpref('quickshowPrefs','roiScimStackROI');
-if ~isfield(data,'ROI')
-    data.ROI = temp.ROI;
-end
+data.ROI = temp.ROI; % so that ROI is always updated if this code is run
+% if ~isfield(data,'ROI')
+%     data.ROI = temp.ROI;
+% end
 Masks = {};
 if strcmp(button,'Yes');
     roifig = figure;
-    set(roifig,'position',[680   361   646   646]);
+    setCurrentFigurePosition(2) 
+    %set(roifig,'position',[680   361   646   646]);
     
     panl = panel(roifig);
     panl.pack('v',{1/4 3/4})  % response panel, stimulus panel
@@ -177,7 +179,7 @@ data.exposureTimes = exp_t;
 % end
 
 
-save(regexprep(data.name,'Acquisition','Raw_Data'), '-struct', 'data');
+save(regexprep(data.name,'Anthony Azevedo\\Acquisition','\\Alex\\Documents\\Data\\CalciumImagingData\\B1'), '-struct', 'data');
 toc
 
 varargout = {data};

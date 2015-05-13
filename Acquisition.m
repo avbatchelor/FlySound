@@ -23,7 +23,6 @@ classdef Acquisition < handle
         flynumber
         cellnumber 
         amplifier1Device
-
         tags
     end
     

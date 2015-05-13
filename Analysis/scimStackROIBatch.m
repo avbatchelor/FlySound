@@ -6,7 +6,7 @@ p.PartialMatching = 0;
 p.addParameter('NewROI','Yes',@ischar);
 p.addParameter('dFoFfig',[],@isnumeric);
 p.addParameter('MotionCorrection',true,@islogical);
-p.addParameter('MakeMovie',true,@islogical);
+p.addParameter('MakeMovie',false,@islogical);
 p.addParameter('MovieLocation','',@ischar);
 p.addParameter('BGCorrectImages',true,@islogical);
 p.addParameter('Channels',[1 2],@isnumeric);
@@ -14,7 +14,7 @@ parse(p,varargin{:});
 
 varargout = {[]};
 
-imdir = regexprep(data.name,{'Raw','.mat','Acquisition'},{'Images','','Raw_Data'});
+imdir = regexprep(data.name,{'Raw','.mat','Anthony Azevedo\\Acquisition'},{'Images','','Alex\\Documents\\Data\\CalciumImagingData\\B1'});
 if ~isdir(imdir)
     error('No Camera Input: Exiting %s routine',mfilename);
 end
@@ -88,7 +88,7 @@ temp.ROI = getpref('quickshowPrefs','roiScimStackROI');
 
 if strcmp(button,'Yes');
     roifig = figure;
-    set(roifig,'position',[680   361   646   646]);
+%     set(roifig,'position',[680   361   646   646]);
     
     panl = panel(roifig);
     panl.pack('v',{1/4 3/4})  % response panel, stimulus panel
@@ -154,6 +154,7 @@ setpref('quickshowPrefs','roiScimStackROI',temp.ROI)
 %% Batch process the bunch using the same ROI.
 
 [protocol,dateID,flynum,cellnum,trialnum,D,trialStem,datastructfile] = extractRawIdentifiers(data.name);
+datastructfile = regexprep(datastructfile,'Anthony Azevedo\\Raw\_Data','Alex\\Documents\\Data\\CalciumImagingData\\B1');
 prtclData = load(datastructfile);
 prtclData = prtclData.data;
 blocktrials = findLikeTrials('name',data.name,'datastruct',prtclData,'exclude',{'displacement','freq','amp','step'});
