@@ -16,7 +16,7 @@ parse(p,varargin{:});
 
 varargout = {[]};
 
-imdir = regexprep(data.name,{'Raw','.mat','Anthony Azevedo\\Acquisition'},{'Images','','Alex\\Documents\\Data\\CalciumImagingData\\B1'});
+imdir = regexprep(data.name,{'Raw','.mat','Alex\\Acquisition'},{'Images','','Alex\\Documents\\Data\\CalciumImagingData\\B1'});
 if ~isdir(imdir)
     error('No Camera Input: Exiting %s routine',mfilename);
 end
@@ -84,13 +84,16 @@ if p.Results.MotionCorrection
 end
 
 %% select ROI 
+% Separate the red and green channels and take an average over all frames 
 I_green = squeeze(nanmean(I(:,:,:,2),3));
 I_red = squeeze(nanmean(I(:,:,:,1),3));
+% Load the last ROI used on the computer 
 temp.ROI = getpref('quickshowPrefs','roiScimStackROI');
 data.ROI = temp.ROI; % so that ROI is always updated if this code is run
 % if ~isfield(data,'ROI')
 %     data.ROI = temp.ROI;
 % end
+
 Masks = {};
 if strcmp(button,'Yes');
     roifig = figure;
@@ -179,7 +182,7 @@ data.exposureTimes = exp_t;
 % end
 
 
-save(regexprep(data.name,'Anthony Azevedo\\Acquisition','\\Alex\\Documents\\Data\\CalciumImagingData\\B1'), '-struct', 'data');
+save(regexprep(data.name,'Alex\\Acquisition','\\Alex\\Documents\\Data\\CalciumImagingData\\B1'), '-struct', 'data');
 toc
 
 varargout = {data};
