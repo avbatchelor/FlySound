@@ -33,7 +33,7 @@ A.protocol.setParams('-q',...
     'displacements',.05,...
     'postDurInSec',6);
 A.tag
-A.run(1)
+A.run(5)
 systemsound('Notify');
 A.clearTags 
 
